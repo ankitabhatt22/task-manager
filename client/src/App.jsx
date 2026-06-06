@@ -33,6 +33,15 @@ function App() {
   fetchTasks();
 };
 
+const toggleTask = async (id) => {
+
+  await api.patch(
+    `/tasks/${id}/toggle`
+  );
+
+  fetchTasks();
+};
+
   return (
     <div style={{ padding: "20px" }}>
       <h1>Task Manager</h1>
@@ -43,15 +52,32 @@ function App() {
 
       {tasks.map((task) => (
   <div key={task.id}>
-    <h3>{task.title}</h3>
+
+    <h3
+  style={{
+    textDecoration: task.completed
+      ? "line-through"
+      : "none"
+  }}
+>
+  {task.title}
+</h3>
 
     <p>{task.description}</p>
 
     <button
-      onClick={() => deleteTask(task.id)}
-    >
-      Delete
-    </button>
+  onClick={() => toggleTask(task.id)}
+>
+  {task.completed
+    ? "Mark Active"
+    : "Mark Complete"}
+</button>
+
+<button
+  onClick={() => deleteTask(task.id)}
+>
+  Delete
+</button>
 
     <hr />
   </div>
