@@ -4,6 +4,7 @@ import TaskForm from "./components/TaskForm";
 
 function App() {
   const [tasks, setTasks] = useState([]);
+  const [filter, setFilter] = useState("all");
 
   useEffect(() => {
     fetchTasks();
@@ -42,15 +43,49 @@ const toggleTask = async (id) => {
   fetchTasks();
 };
 
+const filteredTasks = tasks.filter((task) => {
+
+  if (filter === "active") {
+    return !task.completed;
+  }
+
+  if (filter === "completed") {
+    return task.completed;
+  }
+
+  return true;
+});
+
   return (
     <div style={{ padding: "20px" }}>
       <h1>Task Manager</h1>
 
       <TaskForm addTask={addTask} />
 
+      <div style={{ margin: "20px 0" }}>
+
+  <button
+    onClick={() => setFilter("all")}
+  >
+    All
+  </button>
+
+  <button
+    onClick={() => setFilter("active")}
+  >
+    Active
+  </button>
+
+  <button
+    onClick={() => setFilter("completed")}
+  >
+    Completed
+  </button>
+
+</div>
       <hr />
 
-      {tasks.map((task) => (
+      {filteredTasks.map((task) => (
   <div key={task.id}>
 
     <h3
