@@ -56,6 +56,14 @@ const filteredTasks = tasks.filter((task) => {
   return true;
 });
 
+const activeTasks = tasks.filter(
+  (task) => !task.completed
+).length;
+
+const completedTasks = tasks.filter(
+  (task) => task.completed
+).length;
+
   return (
     <div style={{ padding: "20px" }}>
       <h1>Task Manager</h1>
@@ -72,20 +80,34 @@ const filteredTasks = tasks.filter((task) => {
 
   <button
     onClick={() => setFilter("active")}
+    style={{ marginLeft: "10px" }}
   >
     Active
   </button>
 
   <button
     onClick={() => setFilter("completed")}
+    style={{ marginLeft: "10px" }}
   >
     Completed
   </button>
 
 </div>
+<div style={{ marginTop: "20px" }}>
+        <h3>Active Tasks: {activeTasks}</h3>
+
+        <h3>
+          Completed Tasks: {completedTasks}
+        </h3>
+      </div>
+      
       <hr />
 
-      {filteredTasks.map((task) => (
+  
+    {filteredTasks.length === 0 ? (
+    <h3>No Tasks Found</h3>
+    ) : (
+    filteredTasks.map((task) => (    
   <div key={task.id}>
 
     <h3
@@ -110,13 +132,15 @@ const filteredTasks = tasks.filter((task) => {
 
 <button
   onClick={() => deleteTask(task.id)}
+  style={{ marginLeft: "10px" }}
 >
   Delete
 </button>
 
     <hr />
   </div>
-))}
+))
+)}
 </div>
   );
 }
