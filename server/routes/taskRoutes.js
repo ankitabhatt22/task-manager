@@ -23,4 +23,17 @@ router.post("/", (req, res) => {
   res.status(201).json(task);
 });
 
+router.delete("/:id", (req, res) => {
+
+  const id = Number(req.params.id);
+
+  tasks = tasks.filter(
+    task => task.id !== id
+  );
+
+  res.json({
+    message: "Task deleted"
+  });
+});
+
 module.exports = router;
