@@ -108,8 +108,18 @@ const completedTasks = tasks.filter(
     <h3>No Tasks Found</h3>
     ) : (
     filteredTasks.map((task) => (    
-  <div key={task.id}>
-
+    <div
+  key={task.id}
+  style={{
+    border: task.dueDate &&
+      !task.completed &&
+      new Date(task.dueDate) < new Date()
+        ? "2px solid red"
+        : "none",
+    padding: "10px",
+    marginBottom: "10px",
+  }}
+>
     <h3
   style={{
     textDecoration: task.completed
@@ -121,6 +131,10 @@ const completedTasks = tasks.filter(
 </h3>
 
     <p>{task.description}</p>
+    <p>
+  Due Date:{" "}
+  {task.dueDate || "Not Set"}
+</p>
 
     <button
   onClick={() => toggleTask(task.id)}

@@ -3,6 +3,7 @@ import { useState } from "react";
 function TaskForm({ addTask }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [dueDate, setDueDate] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -12,10 +13,12 @@ function TaskForm({ addTask }) {
     addTask({
       title,
       description,
+      dueDate,
     });
 
     setTitle("");
     setDescription("");
+    setDueDate("");
   };
 
   return (
@@ -24,7 +27,9 @@ function TaskForm({ addTask }) {
         type="text"
         placeholder="Task Title"
         value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) =>
+          setTitle(e.target.value)
+        }
       />
 
       <br /><br />
@@ -32,7 +37,19 @@ function TaskForm({ addTask }) {
       <textarea
         placeholder="Description"
         value={description}
-        onChange={(e) => setDescription(e.target.value)}
+        onChange={(e) =>
+          setDescription(e.target.value)
+        }
+      />
+
+      <br /><br />
+
+      <input
+        type="date"
+        value={dueDate}
+        onChange={(e) =>
+          setDueDate(e.target.value)
+        }
       />
 
       <br /><br />
