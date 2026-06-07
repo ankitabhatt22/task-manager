@@ -78,11 +78,11 @@ const completedTasks = tasks.filter(
   (task) => task.completed
 ).length;
 
-const updateTask = async (id) => {
-  await api.put(`/tasks/${id}`, {
+const updateTask = async (task) => {
+  await api.put(`/tasks/${task.id}`, {
     title: editTitle,
-    description: "",
-    dueDate: "",
+    description: task.description,
+    dueDate: task.dueDate,
   });
 
   setEditingId(null);
@@ -172,7 +172,7 @@ const updateTask = async (id) => {
 
     <button
       onClick={() =>
-        updateTask(task.id)
+        updateTask(task)
       }
     >
       Save
