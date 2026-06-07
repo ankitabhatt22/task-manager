@@ -7,6 +7,7 @@ function App() {
   const [filter, setFilter] = useState("all");
   const [editingId, setEditingId] = useState(null);
   const [editTitle, setEditTitle] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     fetchTasks();
@@ -47,6 +48,17 @@ const toggleTask = async (id) => {
 
 const filteredTasks = tasks.filter((task) => {
 
+  const matchesSearch =
+    task.title
+      .toLowerCase()
+      .includes(
+        searchTerm.toLowerCase()
+      );
+
+  if (!matchesSearch) {
+    return false;
+  }
+
   if (filter === "active") {
     return !task.completed;
   }
@@ -84,7 +96,21 @@ const updateTask = async (id) => {
       <h1>Task Manager</h1>
 
       <TaskForm addTask={addTask} />
-
+      
+      <input
+        type="text"
+        placeholder="Search Tasks..."
+        value={searchTerm}
+        onChange={(e) =>
+          setSearchTerm(e.target.value)
+        }
+        style={{
+          padding: "8px",
+          width: "300px",
+          marginBottom: "15px",
+        }}
+      />
+      
       <div style={{ margin: "20px 0" }}>
 
   <button

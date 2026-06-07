@@ -72,7 +72,7 @@ router.patch("/:id/toggle", (req, res) => {
         }
       : task
   );
-
+  saveTasks();
   res.json({
     message: "Task status updated"
   });
@@ -91,7 +91,7 @@ router.put("/:id", (req, res) => {
         }
       : task
   );
-  
+
     saveTasks();
 
   res.json({
