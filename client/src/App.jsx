@@ -5,6 +5,8 @@ import TaskForm from "./components/TaskForm";
 function App() {
   const [tasks, setTasks] = useState([]);
   const [filter, setFilter] = useState("all");
+  const [editingId, setEditingId] = useState(null);
+  const [editTitle, setEditTitle] = useState("");
 
   useEffect(() => {
     fetchTasks();
@@ -64,6 +66,19 @@ const completedTasks = tasks.filter(
   (task) => task.completed
 ).length;
 
+const updateTask = async (id) => {
+  await api.put(`/tasks/${id}`, {
+    title: editTitle,
+    description: "",
+    dueDate: "",
+  });
+
+  setEditingId(null);
+  setEditTitle("");
+
+  fetchTasks();
+};
+
   return (
     <div style={{ padding: "20px" }}>
       <h1>Task Manager</h1>
@@ -120,15 +135,34 @@ const completedTasks = tasks.filter(
     marginBottom: "10px",
   }}
 >
-    <h3
-  style={{
-    textDecoration: task.completed
-      ? "line-through"
-      : "none"
-  }}
->
-  {task.title}
-</h3>
+   {editingId === task.id ? (
+  <>
+    <input
+      value={editTitle}
+      onChange={(e) =>
+        setEditTitle(e.target.value)
+      }
+    />
+
+    <button
+      onClick={() =>
+        updateTask(task.id)
+      }
+    >
+      Save
+    </button>
+  </>
+) : (
+  <h3
+    style={{
+      textDecoration: task.completed
+        ? "line-through"
+        : "none",
+    }}
+  >
+    {task.title}
+  </h3>
+)}
 
     <p>{task.description}</p>
     <p>
@@ -142,6 +176,15 @@ const completedTasks = tasks.filter(
   {task.completed
     ? "Mark Active"
     : "Mark Complete"}
+</button>
+
+<button
+  onClick={() => {
+    setEditingId(task.id);
+    setEditTitle(task.title);
+  }}
+>
+  Edit
 </button>
 
 <button

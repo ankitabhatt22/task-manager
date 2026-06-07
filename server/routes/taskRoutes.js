@@ -54,4 +54,23 @@ router.patch("/:id/toggle", (req, res) => {
   });
 });
 
+router.put("/:id", (req, res) => {
+  const id = Number(req.params.id);
+
+  tasks = tasks.map((task) =>
+    task.id === id
+      ? {
+          ...task,
+          title: req.body.title,
+          description: req.body.description,
+          dueDate: req.body.dueDate,
+        }
+      : task
+  );
+
+  res.json({
+    message: "Task updated",
+  });
+});
+
 module.exports = router;
