@@ -170,7 +170,8 @@ const updateTask = async (task) => {
   {loading ? (
   <h2>Loading Tasks...</h2>
 ) : filteredTasks.length === 0 ? (
-  <h3>No Tasks Found</h3>
+  <h3>📋 No Tasks Found
+Create your first task to get started.</h3>
 ) : (
   filteredTasks.map((task) => (    
     
@@ -286,6 +287,16 @@ const updateTask = async (task) => {
   position="top-right"
   autoClose={2000}
 />
+
+<footer
+  style={{
+    marginTop: "40px",
+    opacity: 0.7
+  }}
+>
+  Built with React, Express and Node.js
+</footer>
+
 </div>
   );
 }
