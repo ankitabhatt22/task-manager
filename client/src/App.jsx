@@ -232,7 +232,20 @@ const updateTask = async (task) => {
     {task.title}
   </h3>
 )}
-
+    {task.completed ? (
+  <span className="badge completed-badge">
+    Completed
+  </span>
+) : task.dueDate &&
+  new Date(task.dueDate) < new Date() ? (
+  <span className="badge overdue-badge">
+    Overdue
+  </span>
+) : (
+  <span className="badge active-badge">
+    Active
+  </span>
+)}
     <p>{task.description}</p>
     <p>
   Due Date:{" "}

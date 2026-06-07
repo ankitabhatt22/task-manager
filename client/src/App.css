@@ -63,3 +63,27 @@ button {
 .stat-card p {
   margin: 5px 0;
 }
+
+.badge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.active-badge {
+  background: #22c55e;
+  color: white;
+}
+
+.completed-badge {
+  background: #3b82f6;
+  color: white;
+}
+
+.overdue-badge {
+  background: #ef4444;
+  color: white;
+}
