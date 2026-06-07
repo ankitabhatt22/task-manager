@@ -13,17 +13,21 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [editDescription, setEditDescription] = useState("");
   const [editDueDate, setEditDueDate] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchTasks();
   }, []);
 
   const fetchTasks = async () => {
-    const response = await api.get("/tasks");
-    setTasks(response.data);
-  };
+  setLoading(true);
+  const response = await api.get("/tasks");
+  setTasks(response.data);
+  setLoading(false);
+};
 
   const addTask = async (taskData) => {
+  setLoading(true);
   await api.post("/tasks", taskData);
 
   toast.success("Task Added");
@@ -32,6 +36,7 @@ function App() {
 };
 
   const deleteTask = async (id) => {
+  setLoading(true);
 
   const confirmed = window.confirm(
     "Delete this task?"
@@ -162,11 +167,12 @@ const updateTask = async (task) => {
       
       <hr />
 
-  
-    {filteredTasks.length === 0 ? (
-    <h3>No Tasks Found</h3>
-    ) : (
-    filteredTasks.map((task) => (    
+  {loading ? (
+  <h2>Loading Tasks...</h2>
+) : filteredTasks.length === 0 ? (
+  <h3>No Tasks Found</h3>
+) : (
+  filteredTasks.map((task) => (    
     
     <div
   key={task.id}
