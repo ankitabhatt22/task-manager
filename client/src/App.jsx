@@ -1,3 +1,4 @@
+import "./App.css";
 import { useEffect, useState } from "react";
 import api from "./services/api";
 import TaskForm from "./components/TaskForm";
@@ -92,9 +93,8 @@ const updateTask = async (task) => {
 };
 
   return (
-    <div style={{ padding: "20px" }}>
+      <div className="container">      
       <h1>Task Manager</h1>
-
       <TaskForm addTask={addTask} />
       
       <input
@@ -105,10 +105,12 @@ const updateTask = async (task) => {
           setSearchTerm(e.target.value)
         }
         style={{
-          padding: "8px",
-          width: "300px",
-          marginBottom: "15px",
-        }}
+        padding: "10px",
+        width: "100%",
+        maxWidth: "500px",
+        marginBottom: "15px",
+        borderRadius: "8px",
+}}
       />
       
       <div style={{ margin: "20px 0" }}>
@@ -149,18 +151,20 @@ const updateTask = async (task) => {
     <h3>No Tasks Found</h3>
     ) : (
     filteredTasks.map((task) => (    
+    
     <div
   key={task.id}
+  className="task-card"
   style={{
-    border: task.dueDate &&
+    border:
+      task.dueDate &&
       !task.completed &&
       new Date(task.dueDate) < new Date()
         ? "2px solid red"
         : "none",
-    padding: "10px",
-    marginBottom: "10px",
   }}
 >
+
    {editingId === task.id ? (
   <>
     <input
