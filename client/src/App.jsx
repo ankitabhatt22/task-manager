@@ -1,4 +1,6 @@
 import "./App.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useState } from "react";
 import api from "./services/api";
 import TaskForm from "./components/TaskForm";
@@ -22,10 +24,12 @@ function App() {
   };
 
   const addTask = async (taskData) => {
-    await api.post("/tasks", taskData);
+  await api.post("/tasks", taskData);
 
-    fetchTasks();
-  };
+  toast.success("Task Added");
+
+  fetchTasks();
+};
 
   const deleteTask = async (id) => {
 
@@ -37,16 +41,18 @@ function App() {
 
   await api.delete(`/tasks/${id}`);
 
-  fetchTasks();
+toast.success("Task Deleted");
+
+fetchTasks();
 };
 
 const toggleTask = async (id) => {
 
-  await api.patch(
-    `/tasks/${id}/toggle`
-  );
+  await api.patch(`/tasks/${id}/toggle`);
 
-  fetchTasks();
+toast.success("Task Status Updated");
+
+fetchTasks();
 };
 
 const filteredTasks = tasks.filter((task) => {
@@ -87,6 +93,8 @@ const updateTask = async (task) => {
     description: editDescription,
     dueDate: editDueDate,
   });
+
+  toast.success("Task Updated");
 
   setEditingId(null);
   setEditTitle("");
@@ -251,6 +259,10 @@ const updateTask = async (task) => {
   </div>
 ))
 )}
+<ToastContainer
+  position="top-right"
+  autoClose={2000}
+/>
 </div>
   );
 }
