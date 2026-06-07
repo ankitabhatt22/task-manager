@@ -1,7 +1,30 @@
 const express = require("express");
 const router = express.Router();
 
+const fs = require("fs");
+const path = require("path");
+
+const filePath = path.join(
+  __dirname,
+  "../data/tasks.json"
+);
+
 let tasks = [];
+
+if (fs.existsSync(filePath)) {
+  const data = fs.readFileSync(
+    filePath,
+    "utf8"
+  );
+
+  tasks = data ? JSON.parse(data) : [];
+}
+function saveTasks() {
+  fs.writeFileSync(
+    filePath,
+    JSON.stringify(tasks, null, 2)
+  );
+}
 
 router.get("/", (req, res) => {
   res.json(tasks);
@@ -19,7 +42,7 @@ router.post("/", (req, res) => {
   };
 
   tasks.unshift(task);
-
+    saveTasks();
   res.status(201).json(task);
 });
 
@@ -30,6 +53,7 @@ router.delete("/:id", (req, res) => {
   tasks = tasks.filter(
     task => task.id !== id
   );
+  saveTasks();
 
   res.json({
     message: "Task deleted"
@@ -67,6 +91,8 @@ router.put("/:id", (req, res) => {
         }
       : task
   );
+  
+    saveTasks();
 
   res.json({
     message: "Task updated",
