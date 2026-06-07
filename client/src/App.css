@@ -35,16 +35,23 @@ button:hover {
 }
 
 .task-card {
-  background: rgba(15, 23, 42, 0.8);
+  background: rgba(15, 23, 42, 0.85);
   border: 1px solid #334155;
   border-radius: 16px;
   padding: 20px;
   margin: 20px 0;
-  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
 }
 
 .task-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .stats-container {
@@ -59,8 +66,12 @@ button:hover {
   border: 1px solid #334155;
   border-radius: 16px;
   padding: 20px;
-  min-width: 180px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  min-width: 220px;
+  transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
 }
 
 .stat-card h2 {
@@ -108,12 +119,14 @@ button:hover {
   margin-bottom: 30px;
 }
 
-.hero h2 {
-  font-size: 2rem;
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
 }
 
 .hero p {
   color: #94a3b8;
+  font-size: 1.1rem;
 }
 
 .button-group {
@@ -129,4 +142,44 @@ button:hover {
   flex-direction: column;
   gap: 12px;
   margin-bottom: 15px;
+}
+
+.cancel-btn {
+  background: #ef4444;
+}
+
+.cancel-btn:hover {
+  background: #dc2626;
+}
+
+.edit-form .button-group {
+  justify-content: center;
+}
+
+.edit-form button {
+  min-width: 100px;
+}
+
+.complete-btn {
+  background: #22c55e;
+}
+
+.complete-btn:hover {
+  background: #16a34a;
+}
+
+.edit-btn {
+  background: #f59e0b;
+}
+
+.edit-btn:hover {
+  background: #d97706;
+}
+
+.delete-btn {
+  background: #ef4444;
+}
+
+.delete-btn:hover {
+  background: #dc2626;
 }

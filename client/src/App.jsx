@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useState } from "react";
 import api from "./services/api";
 import TaskForm from "./components/TaskForm";
+import { FaCheck, FaEdit, FaTrash } from "react-icons/fa";
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -173,8 +174,7 @@ const updateTask = async (task) => {
   <h3>📋 No Tasks Found
 Create your first task to get started.</h3>
 ) : (
-  filteredTasks.map((task) => (    
-    
+  filteredTasks.map((task) => ( 
     <div
   key={task.id}
   className="task-card"
@@ -188,8 +188,10 @@ Create your first task to get started.</h3>
   }}
 >
 
-   {editingId === task.id ? (
-  <>
+{editingId === task.id ? (
+
+  <div className="edit-form">
+
     <input
       value={editTitle}
       onChange={(e) =>
@@ -214,91 +216,137 @@ Create your first task to get started.</h3>
       }
     />
 
-    <button
-      onClick={() =>
-        updateTask(task)
-      }
-    >
-      Save
-    </button>
-  </>
+    <div className="button-group">
+
+      <button
+        onClick={() =>
+          updateTask(task)
+        }
+      >
+        Save
+      </button>
+
+      <button
+        className="cancel-btn"
+        onClick={() => {
+          setEditingId(null);
+          setEditTitle("");
+          setEditDescription("");
+          setEditDueDate("");
+        }}
+      >
+        Cancel
+      </button>
+
+    </div>
+
+  </div>
+
 ) : (
-  <h3
-    style={{
-      textDecoration: task.completed
-        ? "line-through"
-        : "none",
-    }}
-  >
-    {task.title}
-  </h3>
-)}
-    {task.completed ? (
-  <span className="badge completed-badge">
-    Completed
-  </span>
-) : task.dueDate &&
-  new Date(task.dueDate) < new Date() ? (
-  <span className="badge overdue-badge">
-    Overdue
-  </span>
-) : (
-  <span className="badge active-badge">
-    Active
-  </span>
-)}
+
+  <>
+
+    <div className="task-header">
+
+      <h3>
+        {task.title}
+      </h3>
+
+      {task.completed ? (
+        <span className="badge completed-badge">
+          Completed
+        </span>
+      ) : task.dueDate &&
+        new Date(task.dueDate) <
+        new Date() ? (
+        <span className="badge overdue-badge">
+          Overdue
+        </span>
+      ) : (
+        <span className="badge active-badge">
+          Active
+        </span>
+      )}
+
+    </div>
+
     <p>{task.description}</p>
-    <p>
-  Due Date:{" "}
-  {task.dueDate || "Not Set"}
+
+    <p
+    style={{
+    color: "#94a3b8",
+    fontSize: "14px"
+  }}
+>
+    Created:
+    {" "}
+    {new Date(task.createdAt)
+    .toLocaleDateString()}
 </p>
 
-    <button
-  onClick={() => toggleTask(task.id)}
+    <div className="button-group">
+
+      <button
+  className="complete-btn"
+  onClick={() =>
+    toggleTask(task.id)
+  }
 >
-  {task.completed
-    ? "Mark Active"
-    : "Mark Complete"}
+  <FaCheck /> Complete
 </button>
 
-<button
-  onClick={() => {
-  setEditingId(task.id);
-  setEditTitle(task.title);
-  setEditDescription(task.description);
-  setEditDueDate(task.dueDate || "");
-}}
->
-  Edit
-</button>
+      <button
+        className="edit-btn"
+           onClick={() => {
+          setEditingId(task.id);
+          setEditTitle(task.title);
+          setEditDescription(
+            task.description
+          );
+          setEditDueDate(
+            task.dueDate || ""
+          );
+        }}
+      >
+        <FaEdit /> Edit
+      </button>
 
-<button
-  onClick={() => deleteTask(task.id)}
-  style={{ marginLeft: "10px" }}
+      <button
+  className="delete-btn"
+  onClick={() =>
+    deleteTask(task.id)
+  }
 >
-  Delete
-</button>
 
-    <hr />
-  </div>
+        <FaTrash /> Delete
+      </button>
+
+    </div>
+
+  </>
+
+)}
+
+</div>
 ))
 )}
-<ToastContainer
-  position="top-right"
-  autoClose={2000}
-/>
 
 <footer
   style={{
     marginTop: "40px",
-    opacity: 0.7
+    opacity: 0.7,
+    textAlign: "center"
   }}
 >
   Built with React, Express and Node.js
 </footer>
 
+<ToastContainer
+  position="top-right"
+  autoClose={2000}
+/>
+
 </div>
-  );
-}
+)}
 
 export default App;
