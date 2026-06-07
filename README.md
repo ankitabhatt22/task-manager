@@ -1,16 +1,138 @@
-# React + Vite
+# Personal Task Manager
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack task management application built using React and Node.js. Users can create, update, delete, search, and manage tasks with due dates, completion tracking, filtering, and persistent storage.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+* Create new tasks
+* Edit existing tasks
+* Delete tasks with confirmation
+* Mark tasks as complete/incomplete
+* Filter tasks by:
 
-## React Compiler
+  * All
+  * Active
+  * Completed
+* Search tasks by title
+* Due date support
+* Overdue task highlighting
+* Active and completed task statistics
+* Empty state handling
+* JSON file persistence
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+### Frontend
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* React
+* Axios
+* Vite
+
+### Backend
+
+* Node.js
+* Express.js
+
+### Storage
+
+* JSON File (`tasks.json`)
+
+## Project Structure
+
+task-manager/
+
+├── client/
+
+│   ├── src/
+
+│   │   ├── components/
+
+│   │   ├── services/
+
+│   │   └── App.jsx
+
+│   └── package.json
+
+│
+
+├── server/
+
+│   ├── data/
+
+│   │   └── tasks.json
+
+│   ├── routes/
+
+│   │   └── taskRoutes.js
+
+│   └── server.js
+
+│
+
+└── README.md
+
+## Installation
+
+### Clone Repository
+
+git clone <repository-url>
+
+cd task-manager
+
+### Backend Setup
+
+cd server
+
+npm install
+
+npm run dev
+
+### Frontend Setup
+
+cd client
+
+npm install
+
+npm run dev
+
+## API Documentation
+
+### Get All Tasks
+
+GET /api/tasks
+
+### Create Task
+
+POST /api/tasks
+
+Request Body:
+
+{
+"title": "Learn React",
+"description": "Study hooks",
+"dueDate": "2026-06-10"
+}
+
+### Update Task
+
+PUT /api/tasks/:id
+
+### Toggle Task Status
+
+PATCH /api/tasks/:id/toggle
+
+### Delete Task
+
+DELETE /api/tasks/:id
+
+## Future Improvements
+
+* User authentication
+* Drag and drop task ordering
+* SQLite or MongoDB database
+* Dark/Light theme toggle
+* Cloud synchronization
+
+## Author
+
+Ankita Bhatt
