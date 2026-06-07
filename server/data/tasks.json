@@ -1,34 +1,10 @@
 [
   {
-    "id": 1780825407362,
-    "title": "TASK 1",
-    "description": "",
-    "dueDate": null,
-    "completed": false,
-    "createdAt": "2026-06-07T09:43:27.362Z"
-  },
-  {
-    "id": 1780823463209,
-    "title": "task 3",
-    "description": "",
-    "dueDate": "",
-    "completed": false,
-    "createdAt": "2026-06-07T09:11:03.209Z"
-  },
-  {
-    "id": 1780823460127,
-    "title": "task 2",
-    "description": "",
-    "dueDate": null,
-    "completed": false,
-    "createdAt": "2026-06-07T09:11:00.127Z"
-  },
-  {
-    "id": 1780823456723,
+    "id": 1780846685529,
     "title": "task 1",
-    "description": "",
-    "dueDate": null,
+    "description": "learn react",
+    "dueDate": "2026-06-08",
     "completed": false,
-    "createdAt": "2026-06-07T09:10:56.723Z"
+    "createdAt": "2026-06-07T15:38:05.529Z"
   }
 ]

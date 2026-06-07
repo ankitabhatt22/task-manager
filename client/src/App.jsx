@@ -9,6 +9,8 @@ function App() {
   const [editingId, setEditingId] = useState(null);
   const [editTitle, setEditTitle] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [editDescription, setEditDescription] = useState("");
+  const [editDueDate, setEditDueDate] = useState("");
 
   useEffect(() => {
     fetchTasks();
@@ -82,12 +84,14 @@ const completedTasks = tasks.filter(
 const updateTask = async (task) => {
   await api.put(`/tasks/${task.id}`, {
     title: editTitle,
-    description: task.description,
-    dueDate: task.dueDate,
+    description: editDescription,
+    dueDate: editDueDate,
   });
 
   setEditingId(null);
   setEditTitle("");
+  setEditDescription("");
+  setEditDueDate("");
 
   fetchTasks();
 };
@@ -172,6 +176,23 @@ const updateTask = async (task) => {
       onChange={(e) =>
         setEditTitle(e.target.value)
       }
+      placeholder="Title"
+    />
+
+    <textarea
+      value={editDescription}
+      onChange={(e) =>
+        setEditDescription(e.target.value)
+      }
+      placeholder="Description"
+    />
+
+    <input
+      type="date"
+      value={editDueDate}
+      onChange={(e) =>
+        setEditDueDate(e.target.value)
+      }
     />
 
     <button
@@ -210,9 +231,11 @@ const updateTask = async (task) => {
 
 <button
   onClick={() => {
-    setEditingId(task.id);
-    setEditTitle(task.title);
-  }}
+  setEditingId(task.id);
+  setEditTitle(task.title);
+  setEditDescription(task.description);
+  setEditDueDate(task.dueDate || "");
+}}
 >
   Edit
 </button>
