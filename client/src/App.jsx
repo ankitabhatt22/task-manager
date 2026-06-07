@@ -148,13 +148,17 @@ const updateTask = async (task) => {
   </button>
 
 </div>
-<div style={{ marginTop: "20px" }}>
-        <h3>Active Tasks: {activeTasks}</h3>
+<div className="stats-container">
+  <div className="stat-card">
+    <p>Active Tasks</p>
+    <h2>{activeTasks}</h2>
+  </div>
 
-        <h3>
-          Completed Tasks: {completedTasks}
-        </h3>
-      </div>
+  <div className="stat-card">
+    <p>Completed Tasks</p>
+    <h2>{completedTasks}</h2>
+  </div>
+</div>
       
       <hr />
 
