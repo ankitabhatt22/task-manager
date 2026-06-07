@@ -113,6 +113,12 @@ const updateTask = async (task) => {
   return (
       <div className="container">      
       <h1>Task Manager</h1>
+      <div className="hero">
+      <h2>Organize Your Work</h2>
+      <p>
+      Track tasks, deadlines and progress in one place.
+    </p>
+</div>
       <TaskForm addTask={addTask} />
       
       <input
