@@ -21,6 +21,14 @@ function TaskForm({ addTask }) {
     setDueDate("");
   };
 
+  <div className="hero">
+  <h2>Organize Your Work</h2>
+  <p>
+    Track tasks, deadlines and progress
+    in one place.
+  </p>
+</div>
+
   return (
     <form onSubmit={handleSubmit}>
       <input
