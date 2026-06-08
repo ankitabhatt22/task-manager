@@ -21,44 +21,59 @@ function App() {
   }, []);
 
   const fetchTasks = async () => {
-  setLoading(true);
-  const response = await api.get("/tasks");
-  setTasks(response.data);
-  setLoading(false);
+  try {
+    setLoading(true);
+
+    const response = await api.get("/tasks");
+
+    setTasks(response.data);
+  } catch (error) {
+    toast.error("Failed to load tasks");
+  } finally {
+    setLoading(false);
+  }
 };
 
   const addTask = async (taskData) => {
-  setLoading(true);
-  await api.post("/tasks", taskData);
+  try {
+    await api.post("/tasks", taskData);
 
-  toast.success("Task Added");
+    toast.success("Task Added");
 
-  fetchTasks();
+    fetchTasks();
+  } catch (error) {
+    toast.error("Failed to add task");
+  }
 };
 
   const deleteTask = async (id) => {
-  setLoading(true);
+    const confirmed = window.confirm(
+      "Delete this task?"
+    );
 
-  const confirmed = window.confirm(
-    "Delete this task?"
-  );
+    if (!confirmed) return;
 
-  if (!confirmed) return;
+    try {
+      await api.delete(`/tasks/${id}`);
 
-  await api.delete(`/tasks/${id}`);
+      toast.success("Task Deleted");
 
-toast.success("Task Deleted");
-
-fetchTasks();
-};
+      fetchTasks();
+    } catch (error) {
+      toast.error("Delete failed");
+    }
+  };
 
 const toggleTask = async (id) => {
+  try {
+    await api.patch(`/tasks/${id}/toggle`);
 
-  await api.patch(`/tasks/${id}/toggle`);
+    toast.success("Status Updated");
 
-toast.success("Task Status Updated");
-
-fetchTasks();
+    fetchTasks();
+  } catch (error) {
+    toast.error("Status update failed");
+  }
 };
 
 const filteredTasks = tasks.filter((task) => {
@@ -94,20 +109,24 @@ const completedTasks = tasks.filter(
 ).length;
 
 const updateTask = async (task) => {
-  await api.put(`/tasks/${task.id}`, {
-    title: editTitle,
-    description: editDescription,
-    dueDate: editDueDate,
-  });
+  try {
+    await api.put(`/tasks/${task.id}`, {
+      title: editTitle,
+      description: editDescription,
+      dueDate: editDueDate,
+    });
 
-  toast.success("Task Updated");
+    toast.success("Task Updated");
 
-  setEditingId(null);
-  setEditTitle("");
-  setEditDescription("");
-  setEditDueDate("");
+    setEditingId(null);
+    setEditTitle("");
+    setEditDescription("");
+    setEditDueDate("");
 
-  fetchTasks();
+    fetchTasks();
+  } catch (error) {
+    toast.error("Update failed");
+  }
 };
 
   return (

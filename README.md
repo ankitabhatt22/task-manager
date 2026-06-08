@@ -1,4 +1,4 @@
-# 🚀 Task Manager Pro
+# 🚀 Task Manager 
 
 A modern and user-friendly Task Management application built using **React, Node.js, Express, and JSON-based data storage**.
 
