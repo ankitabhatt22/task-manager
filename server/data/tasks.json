@@ -1,13 +1,5 @@
 [
   {
-    "id": 1780859764308,
-    "title": "Learn React",
-    "description": "Improve web developement\n",
-    "dueDate": "2026-06-13",
-    "completed": false,
-    "createdAt": "2026-06-07T19:16:04.308Z"
-  },
-  {
     "id": 1780859553734,
     "title": "learn node.js",
     "description": "Improve Backend",

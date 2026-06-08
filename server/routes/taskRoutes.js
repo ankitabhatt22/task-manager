@@ -32,6 +32,12 @@ router.get("/", (req, res) => {
 
 router.post("/", (req, res) => {
 
+  if (!req.body.title?.trim()) {
+  return res.status(400).json({
+    message: "Title is required"
+  });
+}
+
   const task = {
     id: Date.now(),
     title: req.body.title,
@@ -97,6 +103,13 @@ router.put("/:id", (req, res) => {
   res.json({
     message: "Task updated",
   });
+
+  if (!req.body.title?.trim()) {
+  return res.status(400).json({
+    message: "Title is required"
+  });
+}
+
 });
 
 module.exports = router;
