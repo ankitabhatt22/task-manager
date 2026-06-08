@@ -372,6 +372,7 @@ Create your first task to get started.</h3>
 />
 
 </div>
-)}
+);
+}
 
 export default App;
